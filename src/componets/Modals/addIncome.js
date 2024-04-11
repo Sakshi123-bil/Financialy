@@ -1,7 +1,6 @@
 import React from "react";
-import { Modal, Form, Input, DatePicker, Select } from "antd";
-import Button from "../Button";
-function AddIncomeModal({
+import { Button , Modal, Form, Input, DatePicker, Select } from "antd";
+function AddExpenseModal({
     isIncomeModalVisible,
     handleIncomeCancel,
     onFinish
@@ -11,7 +10,7 @@ function AddIncomeModal({
         <Modal
             style={{ fontWeight: 600 }}
             title="Add Income"
-            open={isIncomeModalVisible}
+            visible={isIncomeModalVisible}
             onCancel={handleIncomeCancel}
             footer={null}
         >
@@ -43,7 +42,7 @@ function AddIncomeModal({
                     rules={[
                         {
                             required: true,
-                            message: "please input the income amount!"
+                            message: "please input the Incomee amount!"
                         }
                     ]}
                 >
@@ -56,7 +55,7 @@ function AddIncomeModal({
                     rules={[
                         {
                             required: true,
-                            message: "please select the income date!"
+                            message: "please select the Income date!"
                         }
                     ]}
                 >
@@ -74,17 +73,17 @@ function AddIncomeModal({
                     ]}
                 >
                     <Select className="select-input-2">
-                        <Select.Option values="salary">Salary</Select.Option>
-                        <Select.Option values="freelance">Freelance</Select.Option>
-                        <Select.Option values="investment">Investment</Select.Option>
+                        <Select.Option value="salary1">Salary1</Select.Option>
+                        <Select.Option value="freelance1">Freelance1</Select.Option>
+                        <Select.Option value="investment1">Investment1</Select.Option>
                     </Select>
                 </Form.Item>
-                 <Form.Item>
-                    <Button className="btn btn-blue" type="primary" htmlType="submit">Add Income</Button>
+                <Form.Item>
+                    <Button className="btn btn-blue" type="primary" htmlType="submit" >Add Income</Button>
                  </Form.Item>
             </Form>
         </Modal>
-    );
+    )
 }
 
-export default AddIncomeModal;
+export default AddExpenseModal;

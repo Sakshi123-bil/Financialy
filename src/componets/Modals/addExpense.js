@@ -9,8 +9,8 @@ function AddExpenseModal({
     return (
         <Modal
             style={{ fontWeight: 600 }}
-            title="Add Income"
-            open={isExpenseModalVisible}
+            title="Add Expense"
+            visible={isExpenseModalVisible}
             onCancel={handleExpenseCancel}
             footer={null}
         >
@@ -18,7 +18,7 @@ function AddExpenseModal({
                 form={form}
                 layout="vertical"
                 onFinish={(values) => {
-                    onFinish(values, "income");
+                    onFinish(values, "expense");
                     form.resetFields();
                 }}
             >
@@ -42,7 +42,7 @@ function AddExpenseModal({
                     rules={[
                         {
                             required: true,
-                            message: "please input the income amount!"
+                            message: "please input the expense amount!"
                         }
                     ]}
                 >
@@ -55,7 +55,7 @@ function AddExpenseModal({
                     rules={[
                         {
                             required: true,
-                            message: "please select the income date!"
+                            message: "please select the expense date!"
                         }
                     ]}
                 >
@@ -73,13 +73,13 @@ function AddExpenseModal({
                     ]}
                 >
                     <Select className="select-input-2">
-                        <Select.Option values="salary">Salary</Select.Option>
-                        <Select.Option values="freelance">Freelance</Select.Option>
-                        <Select.Option values="investment">Investment</Select.Option>
+                        <Select.Option value="food">Food</Select.Option>
+                        <Select.Option value="education">Education</Select.Option>
+                        <Select.Option value="investment">Fun</Select.Option>
                     </Select>
                 </Form.Item>
                 <Form.Item>
-                    <Button className="btn btn-blue" type="primary" htmlType="submit">Add Expense</Button>
+                    <Button className="btn btn-blue" type="primary" htmlType="submit" >Add Expense</Button>
                  </Form.Item>
             </Form>
         </Modal>
