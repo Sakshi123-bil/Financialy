@@ -32,7 +32,12 @@ const Header = () =>{
     return(
         <div className="Navbar">
              <p  className="logo">Financely</p>
-             {user && (<p onClick={logoutFnc} className="logo link">Logout</p>) }
+             {user && (
+             <div style={{display:"flex",alignItems:"center",gap:"0.5rem"}}>
+             <img src={user.photoURL ? user.photoURL:"userImage"}style={{borderRadius:"50%",height:"2rem",width:'2rem'}}></img>
+             <p onClick={logoutFnc} className="logo link">Logout</p>
+             </div>
+             ) }
              
             
         </div>

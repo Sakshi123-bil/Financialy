@@ -9,6 +9,8 @@ import {auth , db} from "../firebase";
 import moment from "moment";
 import {useAuthState} from "react-firebase-hooks/auth";
 import TransactionsTable from "../componets/TransactionsTable";
+import ChartComponent from "../componets/Charts";
+import NoTransaction from "../componets/NoTransaction";
 function Dashboard() {
     
     const [transactions,setTransactions]=useState([]);
@@ -37,14 +39,14 @@ function Dashboard() {
     const onFinish = (values,type) =>{
         const newTransaction = {
             type:type,
-            date:moment(values.date).format("YYYY-MM-DD"),
+            date:values.date.format("YYYY-MM-DD"),
             amount: parseFloat(values.amount),
             tag:values.tag,
             name:values.name,
         };
         addTransaction(newTransaction);
     };
-    async function addTransaction(transaction){
+    async function addTransaction(transaction , many){
         try{
             const docRef = await addDoc(
                 collection(db , `users/${user.uid}/transactions`),
@@ -52,7 +54,7 @@ function Dashboard() {
             );
             console.log("Document written with ID:" , docRef.id);
             
-                toast.success("Transaction Added!");
+                if(!many)toast.success("Transaction Added!");
                 let newArr = transactions;
                 newArr.push(transaction);
                 setTransactions(newArr);
@@ -61,18 +63,18 @@ function Dashboard() {
          catch(e){
             console.error("Error adding document",e);
            
-                toast.error("could not add transaction");
+                if(!many)toast.error("could not add transaction");
             
         }
     }
 
     useEffect (()=>{
          fetchTransactions();
-    },[])
+    },[user])
     useEffect (() =>{
         calculateBalance();
     },[transactions]);
-    
+
     function calculateBalance(){
          let incomeTotal =0;
          let expenseTotal =0;
@@ -102,6 +104,10 @@ function Dashboard() {
         }
         setLoading(false);
     }
+
+    let sortedTransactions = transactions.sort((a,b)=>{
+        return ( new Date(a.date) - new Date(b.date));
+    })
     return (
         <div>
             {
@@ -114,6 +120,7 @@ function Dashboard() {
                     showExpenseModal={showExpenseModal}
                     showIncomeModal={showIncomeModal}
                 />
+                {transactions && transactions.length!=0?<ChartComponent sortedTransactions={sortedTransactions}></ChartComponent>:<NoTransaction></NoTransaction>}
                 <AddIncomeModal
                     isIncomeModalVisible={isIncomeModalVisible}
                     handleIncomeCancel={handleIncomeCancel}
@@ -124,7 +131,12 @@ function Dashboard() {
                     handleExpenseCancel={handleExpnseCancel}
                     onFinish={onFinish}
                 ></AddExpenseModal>
-                <TransactionsTable transactions={transactions}></TransactionsTable>
+                
+                <TransactionsTable
+                 transactions={transactions} 
+                addTransaction={addTransaction}
+                fetchTransactions={fetchTransactions}
+                ></TransactionsTable>
                 </>
             )
             }
