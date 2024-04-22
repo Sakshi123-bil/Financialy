@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/Financialy/static/css/main.5c275055.css",
+    "main.js": "/Financialy/static/js/main.bbfaa3d1.js",
+    "static/js/453.780747c6.chunk.js": "/Financialy/static/js/453.780747c6.chunk.js",
+    "static/media/logo.svg": "/Financialy/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/Financialy/index.html",
+    "main.5c275055.css.map": "/Financialy/static/css/main.5c275055.css.map",
+    "main.bbfaa3d1.js.map": "/Financialy/static/js/main.bbfaa3d1.js.map",
+    "453.780747c6.chunk.js.map": "/Financialy/static/js/453.780747c6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5c275055.css",
+    "static/js/main.bbfaa3d1.js"
+  ]
+}
